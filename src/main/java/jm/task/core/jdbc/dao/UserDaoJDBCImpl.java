@@ -6,9 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJDBCImpl implements UserDao {
-    private final Connection connection = Util.getConnection();
-    private final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS user" +
+//public class UserDaoJDBCImpl implements UserDao {
+    //private final Connection connection = Util.getConnection();
+    /*private final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS user" +
             "(id INT AUTO_INCREMENT PRIMARY KEY, " +
             "name VARCHAR(15), " +
             "last_name VARCHAR(15), " +
@@ -111,5 +111,5 @@ public class UserDaoJDBCImpl implements UserDao {
             System.out.println("NOT CLEAN");
             throw new RuntimeException(e);
         }
-    }
-}
+    }*/
+//}
