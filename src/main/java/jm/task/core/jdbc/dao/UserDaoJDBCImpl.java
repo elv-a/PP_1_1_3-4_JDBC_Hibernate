@@ -6,9 +6,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//public class UserDaoJDBCImpl implements UserDao {
-    //private final Connection connection = Util.getConnection();
-    /*private final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS user" +
+public class UserDaoJDBCImpl implements UserDao {
+    private final Connection connection = Util.getConnection();
+    private final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS user" +
             "(id INT AUTO_INCREMENT PRIMARY KEY, " +
             "name VARCHAR(15), " +
             "last_name VARCHAR(15), " +
@@ -29,7 +29,6 @@ import java.util.List;
     public void createUsersTable() {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(CREATE_TABLE_QUERY);
-            connection.commit();
             System.out.println("Таблица успешно создана");
 
         } catch (SQLException e) {
@@ -41,7 +40,6 @@ import java.util.List;
     public void dropUsersTable() {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(DROP_TABLE);
-            connection.commit();
             System.out.println("Таблица успешно удалена");
 
         } catch (SQLException e) {
@@ -56,11 +54,7 @@ import java.util.List;
             statement.setString(1, name);
             statement.setString(2, lastName);
             statement.setByte(3, age);
-
             statement.executeUpdate();
-            connection.commit();
-
-            System.out.println("User с именем - " + name + " добавлен в базу данных");
 
         } catch (SQLException e) {
             System.out.println("Method saveUser Error");
@@ -72,8 +66,6 @@ import java.util.List;
         try (PreparedStatement statement = connection.prepareStatement(REMOVE_USER_BY_ID)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-            connection.commit();
-            System.out.println("User DELETE");
 
         } catch (SQLException e) {
             System.out.println("EXCEPTION" + e.getMessage());
@@ -92,7 +84,6 @@ import java.util.List;
                 user.setLastName(resultSet.getString("last_name"));
                 user.setAge(resultSet.getByte("age"));
                 userList.add(user);
-                connection.commit();
             }
         } catch (SQLException e) {
             System.out.println("Метод getAllUsers выбросил ошибку");
@@ -104,12 +95,10 @@ import java.util.List;
     public void cleanUsersTable() {
         try (PreparedStatement statement = connection.prepareStatement(CLEAN_USERS_TABLE)) {
             statement.executeUpdate();
-            connection.commit();
-            System.out.println("Таблица успешно очищена");
 
         } catch (SQLException e) {
             System.out.println("NOT CLEAN");
             throw new RuntimeException(e);
         }
-    }*/
-//}
+    }
+}
